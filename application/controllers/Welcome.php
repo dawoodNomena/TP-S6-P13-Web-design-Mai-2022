@@ -37,6 +37,11 @@ class Welcome extends CI_Controller {
 		$data['actu'] = $this->Fonction->getActualiteById($id);
 		$data['continent'] = $this->Fonction->getContinentById($data['actu']['idcontinent']);
 		$data['titre'] = $data['actu']['titre'];
+		$continent = $this->Fonction->getContinentById($data['actu']['idcontinent']);
+		if($url != $data['actu']['url']) $this->load->view('error');
+		if(!(file_exists($data['actu']['url']."html"))){
+			$this->Fonction->actuHtml($data['actu'], $continent);
+		}
 		$this->load->view('template', $data);
 	}
 
@@ -61,12 +66,17 @@ class Welcome extends CI_Controller {
 		$this->load->helper('image_helper');
 	}
 	public function detailscause($url, $id){
-
 		$this->load->Model('Fonction');
 		$data['cause'] = $this->Fonction->getCauseById($id);
 		$data['vue'] = 'detailscause';
 		$data['titre'] = $data['cause']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
+		$image = image_url($data['cause']['photo']);
+
+		if($url != $data['cause']['url']) $this->load->view('error');
+		if(!(file_exists($data['cause']['url']."html"))){
+			$this->Fonction->causeHtml($data['cause'], $image);
+		}
 		$this->load->view('template', $data);
 	}
 
@@ -85,6 +95,13 @@ class Welcome extends CI_Controller {
 		$data['vue'] = 'detailsconsequence';
 		$data['titre'] = $data['cons']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
+
+		$image = image_url($data['cons']['photo']);
+
+		if($url != $data['cons']['url']) $this->load->view('error');
+		if(!(file_exists($data['cons']['url']."html"))){
+			$this->Fonction->consHtml($data['cons'], $image);
+		}
 		$this->load->view('template', $data);
 	}
 
@@ -103,6 +120,13 @@ class Welcome extends CI_Controller {
 		$data['vue'] = 'detailssolution';
 		$data['titre'] = $data['sol']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
+
+		$image = image_url($data['sol']['photo']);
+
+		if($url != $data['sol']['url']) $this->load->view('error');
+		if(!(file_exists($data['sol']['url']."html"))){
+			$this->Fonction->consHtml($data['sol'], $image);
+		}
 		$this->load->view('template', $data);
 	}
 
@@ -168,6 +192,9 @@ class Welcome extends CI_Controller {
 		$this->Fonction->modifActu($id, $titre, $idcont, $description, $date, $url);
 		$data['table'] = $this->Fonction->getAllTable();
 		$data['liste'] = $this->Fonction->selectgen("actualite");
+
+		$actu = $this->Fonction->getActualiteById($id);
+		unlink($actu['url'].".html");
 		$this->load->view('templateAdmin', $data);
 	}
 

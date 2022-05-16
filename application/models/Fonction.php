@@ -175,7 +175,78 @@ class Fonction extends CI_Model{
         return $slug;
     }
 
+    function actuHtml($actu, $continent){
+        file_put_contents($actu['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <h1><span>'.$actu['titre'].'</span></h1>
+                  <center><h2><span>Continent: </span>'.$continent.'</h2></center>
+                  <center><h3><span>Date: </span>'.$actu['date'].'</h3></center>
+                  </br>
+                  <p>'.$actu['description'].'</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>');
+    }
 
+    function causeHtml($cause, $image){
+        file_put_contents($cause['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <center><img src="'.$image.'.jpg)" alt="img"></center>
+                  <br/>
+                  <h1><span>'.$cause['titre'].'</span></h1>
+                  <p>'.$cause['description'].'</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+        ');
+    }
+
+    function consHtml($cons, $image){
+        file_put_contents($cons['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <center><img src="'.$image.'" alt="img"></center>
+                  <br/>
+                  <h1><span>' .$cons['titre'].'</span></h1>
+                  <p>'.$cons['description'].'</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>');
+    }
+
+    function solHtml($solution, $image){
+        file_put_contents($solution['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <center><img src="'.$image.'" alt="img"></center>
+                  <br/>
+                  <h1><span>' .$solution['titre'].'</span></h1>
+                  <p>'.$solution['description'].'"</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>');
+    }
 }
-
 ?>
