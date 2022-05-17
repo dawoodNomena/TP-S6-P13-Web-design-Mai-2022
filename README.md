@@ -5,7 +5,7 @@
 
 -lien site FO: http://tp-s6-p13-web-mai-2022.alwaysdata.net/  ;
 
--lien site BO: http://tp-s6-p13-web-mai-2022.alwaysdata.net/Welcome/pageloginadmin ;
+-lien site BO: http://tp-s6-p13-web-mai-2022.alwaysdata.net/Welcome/pageloginadmin (admin@gmail.com/1234);
 
 -Score avant optimisation : 90;
 
