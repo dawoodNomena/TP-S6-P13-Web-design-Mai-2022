@@ -44,6 +44,7 @@ class Welcome extends CI_Controller {
 		if(!(file_exists($data['actu']['url']."html"))){
 			$this->Fonction->actuHtml($data['actu'], $continent);
 		}
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 
@@ -55,6 +56,7 @@ class Welcome extends CI_Controller {
 		$data['cont'] = $this->Fonction->getContinents();
 		$titre = $this->Fonction->getContinentById($id);
 		$data['titre'] = 'Actualites-'.$titre;
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 	
@@ -65,6 +67,8 @@ class Welcome extends CI_Controller {
 		$data['vue'] = "causes";
 		$data['titre'] = "Causes";
 		$this->load->view('template', $data);
+		
+		$this->output->cache(10);
 		$this->load->helper('image_helper');
 	}
 	public function detailscause($url, $id){
@@ -73,13 +77,15 @@ class Welcome extends CI_Controller {
 		$data['vue'] = 'detailscause';
 		$data['titre'] = $data['cause']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
-		
+
 		$image = image_url($data['cause']['photo'].".jpg");
 
 		if($url != $data['cause']['url']) $this->load->view('error');
 		if(!(file_exists($data['cause']['url']."html"))){
 			$this->Fonction->causeHtml($data['cause'], $image);
 		}
+
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 
@@ -89,6 +95,7 @@ class Welcome extends CI_Controller {
 		$data['titre'] = "Consequences";
 		$data['liste'] = $this->Fonction->getConsequences();
 		$data['cont'] = $this->Fonction->getContinents();
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 
@@ -97,6 +104,7 @@ class Welcome extends CI_Controller {
 		$data['cons']= $this->Fonction->getConsequenceById($id);
 		$data['vue'] = 'detailsconsequence';
 		$data['titre'] = $data['cons']['titre'];
+		$this->output->cache(10);
 		$data['cont'] = $this->Fonction->getContinents();
 
 		
@@ -106,6 +114,7 @@ class Welcome extends CI_Controller {
 		if(!(file_exists($data['cons']['url']."html"))){
 			$this->Fonction->consHtml($data['cons'], $image);
 		}
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 
@@ -115,6 +124,7 @@ class Welcome extends CI_Controller {
 		$data['vue'] = 'solutions';
 		$data['titre'] = "Solutions";
 		$data['cont'] = $this->Fonction->getContinents();
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 
@@ -131,6 +141,7 @@ class Welcome extends CI_Controller {
 		if(!(file_exists($data['sol']['url']."html"))){
 			$this->Fonction->consHtml($data['sol'], $image);
 		}
+		$this->output->cache(10);
 		$this->load->view('template', $data);
 	}
 
