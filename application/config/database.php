@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'miniprojets6',
+	'hostname' => 'mysql-tp-s6-p13-web-mai-2022.alwaysdata.net',
+	'username' => '268513',
+	'password' => 'Nomena12',
+	'database' => 'tp-s6-p13-web-mai-2022_miniprojets6',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

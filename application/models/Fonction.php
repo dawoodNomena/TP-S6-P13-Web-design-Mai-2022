@@ -158,6 +158,22 @@ class Fonction extends CI_Model{
         $req = "delete from actualite where id=".$id;
         $this->db->query($req);
     }
+    public function supprCause($id){
+        $req = "delete from cause where id=".$id;
+        $this->db->query($req);
+    }
+    public function supprConsequence($id){
+        $req = "delete from consequence where id=".$id;
+        $this->db->query($req);
+    }
+    public function supprSolution($id){
+        $req = "delete from solution where id=".$id;
+        $this->db->query($req);
+    }
+    public function supprContinent($id){
+        $req = "delete from continent where id=".$id;
+        $this->db->query($req);
+    }
 
     public function modifActu($id, $titre, $idcontinent, $description, $date, $url){
         $req = "update actualite set titre='".$titre."',idcontinent=".$idcontinent.", description='".$description."', date='".$date."', url='".$url."' where id=".$id;
@@ -169,13 +185,92 @@ class Fonction extends CI_Model{
         $req= "insert into actualite values(null, '".$titre."', ".$idcontinent.", '".$description."', '".$date."', '".$url."')";
         $this->db->query($req);
     }
+    public function insertContinent($nom){
+        $req= "insert into continent values(null, '".$nom."')";
+        $this->db->query($req);
+    }
+    public function modifierContinent($nom, $id){
+        $req ="update continent set nom='".$nom."' where id=".$id;
+        $this->db->query($req);
+    }
 
     function createSlug($str, $delemiter = '-'){
         $slug = strtolower(trim(preg_replace('/[\s-]+/', $delemiter, preg_replace('/[^A-Za-z0-9-]+/', $delemiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', $delemiter,iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delemiter));
         return $slug;
     }
 
+    function actuHtml($actu, $continent){
+        file_put_contents($actu['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <h1><span>'.$actu['titre'].'</span></h1>
+                  <center><h2><span>Continent: </span>'.$continent.'</h2></center>
+                  <center><h3><span>Date: </span>'.$actu['date'].'</h3></center>
+                  </br>
+                  <p>'.$actu['description'].'</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>');
+    }
 
+    function causeHtml($cause, $image){
+        file_put_contents($cause['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <center><img src="'.$image.'" alt="img"></center>
+                  <br/>
+                  <h1><span>'.$cause['titre'].'</span></h1>
+                  <p>'.$cause['description'].'</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+        ');
+    }
+
+    function consHtml($cons, $image){
+        file_put_contents($cons['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <center><img src="'.$image.'" alt="img"></center>
+                  <br/>
+                  <h1><span>' .$cons['titre'].'</span></h1>
+                  <p>'.$cons['description'].'</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>');
+    }
+
+    function solHtml($solution, $image){
+        file_put_contents($solution['url'].".html", '<section id="about-us" class="about-us padd-section">
+        <div class="container" data-aos="fade-up">
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+                  <center><img src="'.$image.'" alt="img"></center>
+                  <br/>
+                  <h1><span>' .$solution['titre'].'</span></h1>
+                  <p>'.$solution['description'].'"</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>');
+    }
 }
-
 ?>

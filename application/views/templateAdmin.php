@@ -300,7 +300,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                     <?php for($i=0; $i<count($table); $i++) { ?>
-                        <li class="nav-item"> <a class="nav-link" href="<?php echo site_url('Welcome/select')?>?nom=<?php echo $table[$i]['Tables_in_miniprojets6'];?>"><?php echo $table[$i]['Tables_in_miniprojets6'];?></a></li>
+                        <li class="nav-item"> <a class="nav-link" href="<?php echo site_url('Welcome/select')?>?nom=<?php echo $table[$i]['Tables_in_tp-s6-p13-web-mai-2022_miniprojets6'];?>"><?php echo $table[$i]['Tables_in_tp-s6-p13-web-mai-2022_miniprojets6'];?></a></li>
                     <?php } ?>
               </ul>
             </div>
