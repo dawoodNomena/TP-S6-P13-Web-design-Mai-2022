@@ -224,7 +224,7 @@ class Fonction extends CI_Model{
           <div class="row justify-content-center">
             <div class="col-md-7 col-lg-5">
               <div class="about-content" data-aos="fade-left" data-aos-delay="100">
-                  <center><img src="'.$image.'.jpg)" alt="img"></center>
+                  <center><img src="'.$image.'" alt="img"></center>
                   <br/>
                   <h1><span>'.$cause['titre'].'</span></h1>
                   <p>'.$cause['description'].'</p>

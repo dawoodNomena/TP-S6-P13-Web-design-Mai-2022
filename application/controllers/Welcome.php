@@ -73,6 +73,7 @@ class Welcome extends CI_Controller {
 		$data['vue'] = 'detailscause';
 		$data['titre'] = $data['cause']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
+		
 		$image = image_url($data['cause']['photo'].".jpg");
 
 		if($url != $data['cause']['url']) $this->load->view('error');
