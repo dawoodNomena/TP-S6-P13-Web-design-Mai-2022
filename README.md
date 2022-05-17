@@ -9,4 +9,4 @@
 
 -Score avant optimisation : 90;
 
--Apres optimisation(mis en cache, gzip, generer html): 94;
+-Apres optimisation(mis en cache, gzip, generer html): 98;
