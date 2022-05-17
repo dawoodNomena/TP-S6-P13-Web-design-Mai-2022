@@ -18,6 +18,8 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+
 	public function index()
 	{
 		$this->load->model('Fonction');
@@ -71,7 +73,7 @@ class Welcome extends CI_Controller {
 		$data['vue'] = 'detailscause';
 		$data['titre'] = $data['cause']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
-		$image = image_url($data['cause']['photo']);
+		$image = image_url($data['cause']['photo'].".jpg");
 
 		if($url != $data['cause']['url']) $this->load->view('error');
 		if(!(file_exists($data['cause']['url']."html"))){
@@ -96,7 +98,8 @@ class Welcome extends CI_Controller {
 		$data['titre'] = $data['cons']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
 
-		$image = image_url($data['cons']['photo']);
+		
+		$image = image_url($data['cons']['photo'].".jpg");
 
 		if($url != $data['cons']['url']) $this->load->view('error');
 		if(!(file_exists($data['cons']['url']."html"))){
@@ -121,7 +124,7 @@ class Welcome extends CI_Controller {
 		$data['titre'] = $data['sol']['titre'];
 		$data['cont'] = $this->Fonction->getContinents();
 
-		$image = image_url($data['sol']['photo']);
+		$image = image_url($data['sol']['photo'].".jpg");
 
 		if($url != $data['sol']['url']) $this->load->view('error');
 		if(!(file_exists($data['sol']['url']."html"))){
@@ -179,6 +182,42 @@ class Welcome extends CI_Controller {
 		$data['liste'] = $this->Fonction->selectgen("actualite");
 		$this->load->view('templateAdmin', $data);
 	}
+	public function supprCause(){
+		$id = $this->input->get("id");
+		$this->load->model('Fonction');
+		$this->Fonction->supprCause($id);
+		$data['vue'] = "listecause";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['liste'] = $this->Fonction->selectgen("cause");
+		$this->load->view('templateAdmin', $data);
+	}
+	public function supprConsequence(){
+		$id = $this->input->get("id");
+		$this->load->model('Fonction');
+		$this->Fonction->supprConsequence($id);
+		$data['vue'] = "listeconsequence";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['liste'] = $this->Fonction->selectgen("consequence");
+		$this->load->view('templateAdmin', $data);
+	}
+	public function supprSolution(){
+		$id = $this->input->get("id");
+		$this->load->model('Fonction');
+		$this->Fonction->supprSolution($id);
+		$data['vue'] = "listesolution";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['liste'] = $this->Fonction->selectgen("solution");
+		$this->load->view('templateAdmin', $data);
+	}
+	public function supprContinent(){
+		$id = $this->input->get("id");
+		$this->load->model('Fonction');
+		$this->Fonction->supprContinent($id);
+		$data['vue'] = "listecontinent";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['liste'] = $this->Fonction->selectgen("continent");
+		$this->load->view('templateAdmin', $data);
+	}
 
 	public function modifActu(){
 		$id = $this->input->get("id");
@@ -197,6 +236,16 @@ class Welcome extends CI_Controller {
 		unlink($actu['url'].".html");
 		$this->load->view('templateAdmin', $data);
 	}
+	public function modifContinent(){
+		$id = $this->input->get("id");
+		$nom = $this->input->get("nom");
+		$this->load->model('Fonction');
+		$this->Fonction->modifierContinent($nom, $id);
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['liste'] = $this->Fonction->selectgen("continent");
+		$date['vue'] = "listecontinent";
+		$this->load->view('templateAdmin', $data);
+	}
 
 	public function pageModif(){
 		$id = $this->input->get("id");
@@ -208,10 +257,48 @@ class Welcome extends CI_Controller {
 		$data['actu'] = $this->Fonction->getActualiteById($id);
 		$this->load->view('templateAdmin', $data);
 	}
+	public function pageModifCont(){
+		$id = $this->input->get("id");
+		$data['id'] = $id;
+		$this->load->model('Fonction');
+		$data['vue'] = "modifContinent";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['cont'] = $this->Fonction->getContinents();
+		$data['continent'] = $this->Fonction->getContinentById($id);
+		$this->load->view('templateAdmin', $data);
+	}
 
 	public function pageInsertActu(){
 		$this->load->model('Fonction');
 		$data['vue'] = "insertActu";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['cont'] = $this->Fonction->getContinents();
+		$this->load->view('templateAdmin', $data);
+	}
+	public function pageInsertCause(){
+		$this->load->model('Fonction');
+		$data['vue'] = "insertCause";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['cont'] = $this->Fonction->getContinents();
+		$this->load->view('templateAdmin', $data);
+	}
+	public function pageInsertConsequence(){
+		$this->load->model('Fonction');
+		$data['vue'] = "insertConsequence";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['cont'] = $this->Fonction->getContinents();
+		$this->load->view('templateAdmin', $data);
+	}
+	public function pageInsertSolution(){
+		$this->load->model('Fonction');
+		$data['vue'] = "insertSolution";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['cont'] = $this->Fonction->getContinents();
+		$this->load->view('templateAdmin', $data);
+	}
+	public function pageInsertContinent(){
+		$this->load->model('Fonction');
+		$data['vue'] = "insertContinent";
 		$data['table'] = $this->Fonction->getAllTable();
 		$data['cont'] = $this->Fonction->getContinents();
 		$this->load->view('templateAdmin', $data);
@@ -229,6 +316,18 @@ class Welcome extends CI_Controller {
 		$this->Fonction->insertActu($titre, $idcont, $description, $date);
 		$this->load->view('templateAdmin', $data);
 	}
+	public function insertContinent(){
+		$nom = $this->input->get("nom");
+		$this->load->model('Fonction');
+		$this->Fonction->insertContinent($nom);
+		$data['vue'] = "listecontinent";
+		$data['table'] = $this->Fonction->getAllTable();
+		$data['cont'] = $this->Fonction->getContinents();
+		$data['liste'] = $this->Fonction->selectgen("continent");
+		$this->load->view('templateAdmin', $data);
+	}
+
+	
 
 }
 ?>

@@ -158,6 +158,22 @@ class Fonction extends CI_Model{
         $req = "delete from actualite where id=".$id;
         $this->db->query($req);
     }
+    public function supprCause($id){
+        $req = "delete from cause where id=".$id;
+        $this->db->query($req);
+    }
+    public function supprConsequence($id){
+        $req = "delete from consequence where id=".$id;
+        $this->db->query($req);
+    }
+    public function supprSolution($id){
+        $req = "delete from solution where id=".$id;
+        $this->db->query($req);
+    }
+    public function supprContinent($id){
+        $req = "delete from continent where id=".$id;
+        $this->db->query($req);
+    }
 
     public function modifActu($id, $titre, $idcontinent, $description, $date, $url){
         $req = "update actualite set titre='".$titre."',idcontinent=".$idcontinent.", description='".$description."', date='".$date."', url='".$url."' where id=".$id;
@@ -167,6 +183,14 @@ class Fonction extends CI_Model{
     public function insertActu($titre, $idcontinent, $description, $date){
         $url= $this->createSlug($titre);
         $req= "insert into actualite values(null, '".$titre."', ".$idcontinent.", '".$description."', '".$date."', '".$url."')";
+        $this->db->query($req);
+    }
+    public function insertContinent($nom){
+        $req= "insert into continent values(null, '".$nom."')";
+        $this->db->query($req);
+    }
+    public function modifierContinent($nom, $id){
+        $req ="update continent set nom='".$nom."' where id=".$id;
         $this->db->query($req);
     }
 
